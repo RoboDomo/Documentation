@@ -1,2 +1,130 @@
-# Documentation
-Documentation for RoboDomo
+# RoboDomo
+
+RoboDomo is a home automation application that links multiple cloud based services, and direct to hardware services,
+into a unified interface.  Without RoboDomo, or something like it, the end user would have to launch a variety of
+applications on their phone/tablet/browser, to control a proprietary hub or a company's devices.  For example, you would
+run the Nest app to control your thermostat, the Ring app to interact with your doorbell, the (Samsung) SmartThings app
+to control your light switches and ceiling fans, a WWW browser to control your pool and spa pumps and heaters, and so
+on.  
+
+The RoboDomo app is all you need - it provides the user interface needed to control all the things.  It is effectively
+the missing "Hub of Hubs" that the IoT space is sorely missing.
+
+Other than a few 3rd party modules, RoboDomo is written entirely in JavaScript for NodeJS on the server side and React
+on the client side.  
+
+The backend for RoboDomo is a growing number of available microservices that run as Docker containers.  You run only the
+microservices that are appropriate to your home or office.  That is, if you have an LG TV, you'd run the LGTV
+microservice, and if you don't have an LG TV, you would have no need to run it.
+
+The microservices tend to be very short programs (~100 lines of JavaScript) that interface specifically to a "Thing."
+There is a microservice that control and report status for one or more LG TVs, another microservice that interfaces to
+an Autelis pool/spa controller, another that interfaces to Nest's public API to control one or more thermostats and/or
+Nest Protect fire alarms, and so on.  
+
+MQTT is a broadcast style pub/sub communication protocol.  Code subscribes to topics and posts to topics.  Any number of
+running instances of the user interface can subscribe to a topic.  For the purposes of RoboDomo's API, the topics and
+messages are strings.  
+
+Microservices implement the business logic in a way that hides the complexity, discovery, and to control its specific 
+Thing.  They post status messages via MQTT and listen for state change requests via MQTT as well.  The programming 
+techniques to control just about any "Thing" is simple.  Once you know how to send an MQTT message, you can easily
+control all the "Things."  
+
+Since MQTT is a broadcast protocol, all of the devices presenting the user interface are notified of all state changes.
+If you have the UI running on two tablets side by side, you will see the component controlling a light indicate "ON"
+state on both or "OFF" state on both, whenver the state changes.  The state can change by toggling the physical light
+switch, interacting with a switch component in the UI, or programatically.  
+
+The topics are strings that are reasonably constructed.  A light switch topic might be
+```smartthings/name_of_switch/status``` (for status) and software publishes to ```smartthings/name_of_switch/set``` to change
+the state of the switch.  The Nest microservice topics are ```nest/name_of_thermostat/status``` and
+```nest/name_of_thermostate/set```  This orthagonality in the API makes it easy for the programmer to figure out which
+messages s/he wishes to listen for or control.
+
+The granularity of the topics and messages is typically very fine: light switch state = on/off, instaed of "all light
+switches" and a bundle of states in JSON form.  This allows your UI components to subscribe to just the information it
+cares about or needs, and makes the web app a lot more responsive to events.  Some of the topics do return information
+in JSON, when the message/values are tightly bound to a Thing/component.
+
+## RoboDomo puts the "Smart" in Smart Home
+
+RoboDomo features a Macros microservice and a Triggers microservice.  These are two powerful concepts that enable the
+implementation of scripts and rules; your smart home becomes more than just several Things that you can remotely control
+
+
+The Macros microservice listens for the name of a macro and publishes an arbitrarily long list of MQTT topics/messages.
+A handy macro might be to turn off all the devices in your home (e.g. at bedtime) except for the TV in your bedroom, and
+sets the thermostat to 72.  The "Good Night" macro described controls multiple devices across multiple providers (e.g.
+SmartThings to turn off lights, Logitech to control the TVs, Nest to set the thermostat temperature).  A corresponding
+Web UI component might be a pushbutton that simply sends the macro topic/message.  Thus you can have a "Good Night"
+button in your UI.
+
+You are only limited by your imagination as to what you can do with Macros.  Another example are "TV Break" and
+corresponding "TV Resume"  macros.  TV Break turns on the light and pauses the TV, so you can go get a drink from the
+fridge or have a bathroom break.  The TV Resume macro does the reverse - turns off the light and resumes the TV playing.
+
+Triggers are intelligent rules, based upon events.  There is an MQTT command line program that you can send any topic
+and message.  So if you want to turn on a specific light at 3PM and turn it off at 5PM, you can set up a simple cron
+job.  However, you really want to monitor the state of the light switch.  When you turn it on at 3PM, did it really turn
+on?  If not, you want to re-send the MQTT message periodically until you get a status message that the light is on.
+
+Triggers might subscribe to a handful of topics and act upon the state of more than one device.  Examples of Triggers:
+
+1) At sunset, turn on the garden lights, and at sunrise, turn them off.  The time for sunset and sunrise are provided by
+the Weather microservice.  
+
+2) If the soil moisture sensor indicates the ground is wet, do not turn on the sprinklers today.
+
+3) If the prediected high temperature is 100 degrees or more, run the pool filter pump for 10 hours, otherwise run it
+for 8 hours.
+
+4) When the spa is turned on, monitor the temperature until it reaches 90 degrees F and then announce the spa is warm
+enough to comfortably enter and turn on the jets.  When the temperature hits the target temperature, announce that and 
+stop monitoring.  If the user turns off the spa, stop monitoring.
+
+5) If the temperature in the home office reaches 80 degrees, turn on the ceiling fan.  If the temperature remains 80 or
+increases, bump up the fan speed.
+
+6) If the motion sensor in the bathroom is triggered, turn on the bathroom lights.  But if it's after 10PM and before
+6AM, turn on the light but set the brighness to 10%.
+
+7) When the doorbell senses motion, turn on the porch light.  When the doorbell is pressed, pause the TV and turn on 
+the entryway lights, (but only when it's not between sunset and sunrise!).
+
+8) When a button on the wall opposite the light switches is pressed, turn on the lights.  If the lights are already on,
+turn them off.
+
+9) When a button on the wall by the door to the backyard/pool is pressed, turn on the spa, the spa heater, and the
+outside light (if it's dark outside).  
+
+## Getting Started
+
+Before you start doing contruction (e.g. replacing light switches in the walls), you can get a feel for how home
+automation and remote controls with a small investment in hardware.
+
+This is a fairly cheap barebones PC that works perfectly fine as the hub of hubs for RoboDomo:
+* https://www.amazon.com/gp/product/B00KR0QHXW/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&th=1
+You will need a cheap SSD and 4G of RAM.  This is a much better alternative than trying to make the backend run on a
+Raspberry PI.  This PC runs any Linux distro, kept up to date as distros typically are.
+
+To control switches and dimmers and fans and the like, you will need a SmartThings hub.  
+* https://www.amazon.com/Samsung-SmartThings-Smart-Home-Hub/dp/B010NZV0GE
+The more you work with IoT, the more obvious it becomes that the hardware manufacturers want to sell you a hub as well
+as the Things the hub controls.  This SmartThings hub works with Z Wave devices (Z Wave is a radio protocol), Zigbee
+(another radio protocol), bluetooth, and some Things that are on your WiFi or LAN via direct IP control.
+
+You can plug one of these smart plugs into the wall and a lamp into the plug and conrol it via SmartThings.  Set up for
+all this is just a few minutes.
+https://www.amazon.com/GE-Appliances-Required-SmartThings-28169/dp/B004AMB3CI/ref=sr_1_9?qid=1556146999&refinements=p_n_feature_fourteen_browse-bin%3A6652764011&s=lamps-light&sr=1-9
+
+You can control your lamp with your voice by adding an Amazon Echo of Google Home.
+* https://www.amazon.com/dp/B0792KTHKJ/ref=fs_ods_aucc_dt
+* https://www.bestbuy.com/site/google-home-mini-smart-speaker-with-google-assistant-chalk/6082194.p?skuId=6082194&ref=212&loc=1&ref=212&loc=1&ds_rl=1266837&ds_rl=1266837&gclid=Cj0KCQjwkoDmBRCcARIsAG3xzl9e6GDIloloxgaKwZMXdvskbwq6JQkEvANss0p4lxEwKKnw20h24awaAtMpEALw_wcB&gclsrc=aw.ds
+
+## Continue Reading
+
+* [DNS and Routing](../../Networking.md)
+* [SmartThings MQTT Bridge](../../MQTT-Bridge.md)
+* [Speaker / Text to Speech](../../RoboSpeak.md)
+
