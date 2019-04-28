@@ -1,5 +1,4 @@
 # RoboDomo: Networking and DNS
-
 _Dynamic Name System_ (DNS) is the white pages of the Internet.  Every device has an IP address, but humans don't easily
 remember IP addresses in general, nor what device is at a specific address.  For these reasons (and more), we set up a
 server that you configure the binding between human friendly text names to IP addresses.  For our purposes, we need to
@@ -10,6 +9,7 @@ The reason we set up a local DNS server is that it would be expensive and more w
 Internet, purchase and manage a domain name, and configure and update the DNS entries as you ad devices to your home.
 There really isn't a point to having your names available anywhere but on your LAN/WiFi.
 
+## Routing
 Routing is the means by which packets to or from a device are delivered to or sent from your devices.  The most
 basic setup is to have a netmask of 255.255.255.0, which allows you to use a range of 254 IP addresses - 192.168.0.1
 through 192.168.0.254, for example.  This is how your consumer grade router (given to you by your ISP) is likely to be
@@ -59,8 +59,47 @@ For many devices, you can ping by name to see if the device is online.
 Many of the microservices need to control a device via IP address/network connection.  Without a static IP for that
 device, how is the microservice supposed to know what IP to connect to?
 
+## DNS
+DNS is a bit more complicated to set up.  If you want to have local names for your devices and computers, you have a
+couple of choices: edit /etc/hosts files on all your computers, or set up a DNS server for your LAN.
 
+Editing /etc/hosts and keeping them all in sync on your SOHO/home computers is a bit of work and troublesome because you
+have to keep all those files in sync.  If you add a device and IP address to your LAN, you have to edit all the
+/etc/hosts on all your systems.  
 
+Setting up a single DNS server to handle DHCP and DNS is ideal.  We recommend using dnsmasq running on the same machine
+as you run the microservices/Docker containers.
 
+Documentation for dnsmasq can be found here:
+* http://thekelleys.org.uk/dnsmasq/doc.html
 
+When you set up dnsmasq, you will then disable DHCP in your router and set the IP address of the DNS server in your
+router to point to your dnsmasq server.  
 
+You will set up a static IP for your dnsmasq server on the server.  It will not have DHCP available at boot time to
+assign itself an IP!  However, once it is booted, every other device on your network will be able to get its appropritae
+IP from your dnsmasq server.
+
+## Advanced Setup
+Ubiquitiy sells a small router for about $50 US:
+* https://www.amazon.com/Ubiquiti-EdgeRouter-Advanced-Gigabit-Ethernet/dp/B00YFJT29C
+
+This router is compact and can be configured to load balance between 2 internet connections or simply act like your
+ISP's router.  You may or may not need to use your ISP router in bridge mode, though the EdgeRouter X (ERX) can connect
+directly to your ISP's handoff if it is ethernet (in some cases).
+
+The ERX runs Linux and has a limited amount of storage.  What you can do is set up dnsmasq on it and it will both assign
+IP addresses via DHCP and act as your DNS server.
+
+The ERX does not do WiFi.  For that, you will need to purchase one or more Access Points.
+* https://www.amazon.com/Ubiquiti-UAP-AC-LITE-802-11ac-Gigabit-Dual-Radio/dp/B01DRM6MLI/
+
+If you use more than one of these access points (in different rooms), the router automatically sets up a mesh WiFi
+network.  As you walk around your home/office with your phone connected to WiFi, it will automatically switch its
+connection to the access point with the strongest signal.  This is ideal for a home/office large enough that WiFi signal
+is weak far from the main access point.
+
+The ERX is not for novices at networking.  Setting up dnsmasq on a server is relatively easy in comparison.
+
+## See also:
+* [README](./README.md)

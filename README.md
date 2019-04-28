@@ -17,41 +17,9 @@ The backend for RoboDomo is a growing number of available microservices that run
 microservices that are appropriate to your home or office.  That is, if you have an LG TV, you'd run the LGTV
 microservice, and if you don't have an LG TV, you would have no need to run it.
 
-The microservices tend to be very short programs (~100 lines of JavaScript) that interface specifically to a "Thing."
-There is a microservice that control and report status for one or more LG TVs, another microservice that interfaces to
-an Autelis pool/spa controller, another that interfaces to Nest's public API to control one or more thermostats and/or
-Nest Protect fire alarms, and so on.  
-
-MQTT is a broadcast style pub/sub communication protocol.  Code subscribes to topics and posts to topics.  Any number of
-running instances of the user interface can subscribe to a topic.  For the purposes of RoboDomo's API, the topics and
-messages are strings.  
-
-Microservices implement the business logic in a way that hides the complexity, discovery, and to control its specific 
-Thing.  They post status messages via MQTT and listen for state change requests via MQTT as well.  The programming 
-techniques to control just about any "Thing" is simple.  Once you know how to send an MQTT message, you can easily
-control all the "Things."  
-
-Since MQTT is a broadcast protocol, all of the devices presenting the user interface are notified of all state changes.
-If you have the UI running on two tablets side by side, you will see the component controlling a light indicate "ON"
-state on both or "OFF" state on both, whenver the state changes.  The state can change by toggling the physical light
-switch, interacting with a switch component in the UI, or programatically.  
-
-The topics are strings that are reasonably constructed.  A light switch topic might be
-```smartthings/name_of_switch/status``` (for status) and software publishes to ```smartthings/name_of_switch/set``` to change
-the state of the switch.  The Nest microservice topics are ```nest/name_of_thermostat/status``` and
-```nest/name_of_thermostate/set```  This orthagonality in the API makes it easy for the programmer to figure out which
-messages s/he wishes to listen for or control.
-
-The granularity of the topics and messages is typically very fine: light switch state = on/off, instaed of "all light
-switches" and a bundle of states in JSON form.  This allows your UI components to subscribe to just the information it
-cares about or needs, and makes the web app a lot more responsive to events.  Some of the topics do return information
-in JSON, when the message/values are tightly bound to a Thing/component.
-
 ## RoboDomo puts the "Smart" in Smart Home
-
 RoboDomo features a Macros microservice and a Triggers microservice.  These are two powerful concepts that enable the
 implementation of scripts and rules; your smart home becomes more than just several Things that you can remotely control
-
 
 The Macros microservice listens for the name of a macro and publishes an arbitrarily long list of MQTT topics/messages.
 A handy macro might be to turn off all the devices in your home (e.g. at bedtime) except for the TV in your bedroom, and
@@ -104,7 +72,7 @@ Before you start doing contruction (e.g. replacing light switches in the walls),
 automation and remote controls with a small investment in hardware.
 
 This is a fairly cheap barebones PC that works perfectly fine as the hub of hubs for RoboDomo:
-* https://www.amazon.com/gp/product/B00KR0QHXW/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&th=1
+* https://www.amazon.com/gp/product/B00KR0QHXW/
 You will need a cheap SSD and 4G of RAM.  This is a much better alternative than trying to make the backend run on a
 Raspberry PI.  This PC runs any Linux distro, kept up to date as distros typically are.
 
@@ -116,15 +84,16 @@ as the Things the hub controls.  This SmartThings hub works with Z Wave devices 
 
 You can plug one of these smart plugs into the wall and a lamp into the plug and conrol it via SmartThings.  Set up for
 all this is just a few minutes.
-https://www.amazon.com/GE-Appliances-Required-SmartThings-28169/dp/B004AMB3CI/ref=sr_1_9?qid=1556146999&refinements=p_n_feature_fourteen_browse-bin%3A6652764011&s=lamps-light&sr=1-9
+https://www.amazon.com/GE-Appliances-Required-SmartThings-28169/dp/B004AMB3CI/
 
 You can control your lamp with your voice by adding an Amazon Echo of Google Home.
-* https://www.amazon.com/dp/B0792KTHKJ/ref=fs_ods_aucc_dt
-* https://www.bestbuy.com/site/google-home-mini-smart-speaker-with-google-assistant-chalk/6082194.p?skuId=6082194&ref=212&loc=1&ref=212&loc=1&ds_rl=1266837&ds_rl=1266837&gclid=Cj0KCQjwkoDmBRCcARIsAG3xzl9e6GDIloloxgaKwZMXdvskbwq6JQkEvANss0p4lxEwKKnw20h24awaAtMpEALw_wcB&gclsrc=aw.ds
 
 ## Continue Reading
 
-* [DNS and Routing](../../Networking.md)
-* [SmartThings MQTT Bridge](../../MQTT-Bridge.md)
-* [Speaker / Text to Speech](../../RoboSpeak.md)
+* [Hardware](./Hardware.md)
+* [DNS and Routing](./Networking.md)
+* [Docker](./Docker.md)
+* [MQTT](./MQTT.md)
+* [SmartThings MQTT Bridge](./MQTTBridge.md)
+* [Speaker / Text to Speech](./RoboSpeak.md)
 
