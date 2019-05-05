@@ -14,6 +14,7 @@ debugging output.
 The microservices are typically configured via ENV variables.  These are documented in the README for the microservice.
 
 ### development scripts
+
 * build.sh - builds a docker container for the microservice
 * debug.sh - runs the microservice in Docker, not as a deamon.
 * run.sh - runs the microservice in Docker, as a daemon.
@@ -27,6 +28,7 @@ If you are not running the microservices on a RoboDomo (Docker) server (yet), yo
 the microservices you choose.
 
 ### MQTT
+
 The entire communication strategy is implemented using MQTT.  The client side uses MQTT to listen for state changes and
 to publish set messages to effect a change in the devices being controlled (e.g. turn on power, set volume, set
 thermostat set point...).  The microservices (servers) listen for set messages and effect the change in the device they

@@ -96,4 +96,5 @@ You can control your lamp with your voice by adding an Amazon Echo of Google Hom
 * [MQTT](./MQTT.md)
 * [SmartThings MQTT Bridge](./MQTTBridge.md)
 * [Speaker / Text to Speech](./RoboSpeak.md)
+* [Developing](./Developing.md)
 
