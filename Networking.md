@@ -101,5 +101,13 @@ is weak far from the main access point.
 
 The ERX is not for novices at networking.  Setting up dnsmasq on a server is relatively easy in comparison.
 
-## See also:
-* [README](./README.md)
+## Continue Reading
+
+* [Hardware](./Hardware.md)
+* [DNS and Routing](./Networking.md)
+* [Docker](./Docker.md)
+* [MQTT](./MQTT.md)
+* [SmartThings MQTT Bridge](./MQTTBridge.md)
+* [Speaker / Text to Speech](./RoboSpeak.md)
+* [Developing](./Developing.md)
+

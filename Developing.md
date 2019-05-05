@@ -114,3 +114,13 @@ changed and it will publish a staus/power topic with "on" value.  In the while(1
 ```this.wait(500)``` is called to defer the next http poll for half a second (thus the latency for TV turned on to
 status message is .5 seconds max).
 
+## Continue Reading
+
+* [Hardware](./Hardware.md)
+* [DNS and Routing](./Networking.md)
+* [Docker](./Docker.md)
+* [MQTT](./MQTT.md)
+* [SmartThings MQTT Bridge](./MQTTBridge.md)
+* [Speaker / Text to Speech](./RoboSpeak.md)
+* [Developing](./Developing.md)
+
