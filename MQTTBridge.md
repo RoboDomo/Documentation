@@ -15,6 +15,9 @@ software.  Fortunately, the developer also provides a ready made Docker image, w
 You will need to add some Groovy code to the SmartThings IDE WWW site (free registration required).  The instructions for
 this is in the README as well.  Once this is set up, you will not need to mess with the SmartThings IDE.
 
+_Note: when there is a power failure, you may have to reset the SmartThings hub._  The hub can get into a state where it
+refuses connections.  See https://github.com/stjohnjohnson/smartthings-mqtt-bridge/issues/129.
+
 An example of the yaml configuration file for the bridge:
 
 ```
