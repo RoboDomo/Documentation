@@ -24,7 +24,7 @@ An example of the yaml configuration file for the bridge:
 ---
 mqtt:
     # Specify your MQTT Broker's hostname or IP address here
-    host: ha
+    host: robodomo
     # Preface for the topics $PREFACE/$DEVICE_NAME/$PROPERTY
     preface: smartthings
 
