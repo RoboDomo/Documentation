@@ -90,6 +90,7 @@ You can control your lamp with your voice by adding an Amazon Echo of Google Hom
 
 ## Continue Reading
 
+* [Quick Start](./QuickStart.md)
 * [Hardware](./Hardware.md)
 * [DNS and Routing](./Networking.md)
 * [Docker](./Docker.md)

@@ -103,6 +103,7 @@ The ERX is not for novices at networking.  Setting up dnsmasq on a server is rel
 
 ## Continue Reading
 
+* [Quick Start](./QuickStart.md)
 * [Hardware](./Hardware.md)
 * [DNS and Routing](./Networking.md)
 * [Docker](./Docker.md)

@@ -120,6 +120,7 @@ status message is .5 seconds max).
 
 ## Continue Reading
 
+* [Quick Start](./QuickStart.md)
 * [Hardware](./Hardware.md)
 * [DNS and Routing](./Networking.md)
 * [Docker](./Docker.md)

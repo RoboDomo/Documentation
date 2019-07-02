@@ -98,6 +98,7 @@ PI simply has a USB powered speaker plugged into it and runs the RoboDomo Speak 
 
 ## Continue Reading
 
+* [Quick Start](./QuickStart.md)
 * [Hardware](./Hardware.md)
 * [DNS and Routing](./Networking.md)
 * [Docker](./Docker.md)
