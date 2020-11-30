@@ -168,16 +168,16 @@ The array of tiles specifies the specific tiles to be presented in the user inte
 dashboards: [
   { 
     title: "Theater",
-	key: "theater",
-	tiles: [
-	  { type: "clock" },
-	  { tyype: "theater", title: "Theater" },
-	  { type: "lock", hub: "hubitat", device: "Front Door Lock", title: ""Front Door Lock" },
-	  { type: "fan", hub: "hubitat", device: "Family Room Ceiling Fan" },
-	  { type: "switch", hub: "hubitat", device: "Family Room Ceiling Fan Switch" },
-	  { type: "macro",  name: "Bed Time", label "Bed Time" },
-	  ...
-	],
+    key: "theater",
+    tiles: [
+      { type: "clock" },
+      { tyype: "theater", title: "Theater" },
+      { type: "lock", hub: "hubitat", device: "Front Door Lock", title: ""Front Door Lock" },
+      { type: "fan", hub: "hubitat", device: "Family Room Ceiling Fan" },
+      { type: "switch", hub: "hubitat", device: "Family Room Ceiling Fan Switch" },
+      { type: "macro",  name: "Bed Time", label "Bed Time" },
+      ...
+    ],
   },
   {
     title: "Bed Room",
