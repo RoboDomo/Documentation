@@ -119,10 +119,11 @@ There should be an activity for "All Off" that turns off the devices in the thea
 
 ```
 theaters: [
+  // The family room theater
   {
     title: "Family Room",
-	key: "family-room",
-	guide: <SchedulesDIrect tv guide code>,
+    key: "family-room",
+    guide: <SchedulesDIrect tv guide code>,
     devices: [
 	  { name: "LG TV", title: "OLED TV", type: "lgtv", favorites: lgtvFavorites, device: "OLEDE8P" },
 	  { name: "AVR", title: "Denon AVR", type: denon", device: "denon-avr" },
@@ -136,6 +137,7 @@ theaters: [
 	  ...
 	],
   },
+  // Theater for the bed room
   {
     title: "Bed Room",
 	key: "bed-room",
