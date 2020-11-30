@@ -57,7 +57,7 @@ HostBase provides some handy methods:
 - getSetting(setting) - gets a record the MongoDB database with the key "setting".
 - putSetting(setting, value) - sets a record in the database using the key setting.
 
-- config() - returns the global config.json Object, which is stored in the MongoDB database.
+- config() - returns the global Config.js Object, which is stored in the MongoDB database.
 
 # See Also
 
