@@ -26,7 +26,7 @@ The Config.js file exports a single JavaScript Object (not JSON, not JSON string
 
 ## root members
 
-A root member is a key in the configuration object.  The member might be another Object or an Array or a single value.
+A root member is a key in the configuration object. The member might be another Object or an Array or a single value.
 
 These root members are useful:
 
@@ -159,14 +159,15 @@ theaters: [
 
 The dashboards member is a root member array.
 
-The array contains a list of [Dashboard](Dashboards.md) Arrays, each one defining items for a tile based user interface.  This interface can present multiple dashboards in the user interface - one for the Family Room, one for the Bed Room, and so on.  You probably want to control the ceiling fan in the Family Room from the Family Room dashboard, but not the Bed Room dashboard.
+The array contains a list of [Dashboard](Dashboards.md) Arrays, each one defining items for a tile based user interface. This interface can present multiple dashboards in the user interface - one for the Family Room, one for the Bed Room, and so on. You probably want to control the ceiling fan in the Family Room from the Family Room dashboard, but not the Bed Room dashboard.
 
-The array of tiles specifies the specific tiles to be presented in the user interface. Each tile type Object might contain members specific to that type of tile.  For example, the Clock tile needs no additional members, but the Weather tile needs a location member to determine what weather information to display (you might have weather for your home and another for your office...).
+The array of tiles specifies the specific tiles to be presented in the user interface. Each tile type Object might contain members specific to that type of tile. For example, the Clock tile needs no additional members, but the Weather tile needs a location member to determine what weather information to display (you might have weather for your home and another for your office...).
 
-## Example
+### Example
+
 ```
 dashboards: [
-  { 
+  {
     title: "Theater",
     key: "theater",
     tiles: [
@@ -192,6 +193,68 @@ dashboards: [
 ],
 ```
 
+## waather member
+
+The weather root member is an Object that contains information about the locations you want to monitor weather for.
+
+### Example
+
+```
+weather: {
+  // monitor weather in LA and SD
+  locations: [
+    { name: "Los Angeles, CA", device: "92010", default: true },
+    { name: "San Diego, CA", device: "92109" }
+  ]
+},
+```
+
+## rgb member
+
+The rbg root member is an array of RGB controllable devices (lights, light strips, etc.).
+
+### Example
+
+```
+rgb: [
+  { name: "Kitchen Cabinets Controller", label: "Kitchen Cabinet Lights", hub: "hubitat", type: "rgb" },
+  ...
+],
+```
+
+# # autelis member
+
+The autelis root member is an Object that defines the location and credentials of the Autelis API server, the weather location, and a deviceMap with forward and backward hash maps (Objects).  The configuration of your pool and autelis controller is unique to how your installer set up your pool when it was constructed.  The Autelis controller reports devices like aux1, which might be the spa jets in one home but pool cleaner in another.  The forward and reverse maps can be used to associate the aux names to friendly names (e.g. aux1 -> jets).
+
+This member is used to configure the [autelis-microservice](https://github.com/RoboDomo/autelis-microservice).
+
+### Example
+
+```
+autelis: {
+  device: "autelis",
+  name: "Pool Control",
+  url: "http://poolcontrol",
+  location: "92010",
+  credentials: {
+    username: "admin",
+    password: "admin",
+  },
+  deviceMap: {
+    forward: {
+      pump: "pump",
+      jets: "aux1", 
+      ...
+    },
+    backward: {
+      pump: "pump",
+      aux1: "jets",
+      ...
+    },
+  },
+},
+```
+
 # See Also:
 
 ## Documentation
@@ -204,3 +267,4 @@ dashboards: [
 - The [macros-microservice](https://github.com/RoboDomo/macros-microservice) repository.
 - The [config-microservice](https://github.com/RoboDomo/config-microservice) repository.
 - The [presence-microservice](https://github.com/RoboDomo/presence-microservice) repository.
+- The [autelis-microservice](https://github.com/RoboDomo/autelis-microservice) repository.
