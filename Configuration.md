@@ -125,10 +125,10 @@ theaters: [
     key: "family-room",
     guide: <SchedulesDIrect tv guide code>,
     devices: [
-	  { name: "LG TV", title: "OLED TV", type: "lgtv", favorites: lgtvFavorites, device: "OLEDE8P" },
-	  { name: "AVR", title: "Denon AVR", type: denon", device: "denon-avr" },
-	  { name: "TiVo", title: "TiVo Bolt", type: "tivo", favorites: tivoFavorites, device: "tivo-bolt", guide: <SchedulesDirect tv guide code>"},
-	  { name: "Apple TV", title: "Apple TV 4K", type: "appletv", device: "family-room-appletv" },
+      { name: "LG TV", title: "OLED TV", type: "lgtv", favorites: lgtvFavorites, device: "OLEDE8P" },
+      { name: "AVR", title: "Denon AVR", type: denon", device: "denon-avr" },
+      { name: "TiVo", title: "TiVo Bolt", type: "tivo", favorites: tivoFavorites, device: "tivo-bolt", guide: <SchedulesDirect tv guide code>"},
+      { name: "Apple TV", title: "Apple TV 4K", type: "appletv", device: "family-room-appletv" },
 	  ...
 	],
 	activities: [
@@ -140,14 +140,14 @@ theaters: [
   // Theater for the bed room
   {
     title: "Bed Room",
-	key: "bed-room",
-	guide: <SchedulesDIrect tv guide code>,
-	devices: [
-	  ...
-	],
-	activites: [
-	  ...
-	],
+    key: "bed-room",
+    guide: <SchedulesDIrect tv guide code>,
+    devices: [
+      ...
+    ],
+    activites: [
+      ...
+    ],
   },
   ...
 ],
