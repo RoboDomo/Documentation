@@ -40,13 +40,13 @@ The mqtt member is a root member Object. It contains keys for host and port of t
 
 ```
 mqtt: {
-	host: "mqtt-broker",
-	port: 80,
+  host: "mqtt-broker",
+  port: 80,
 
-	// topics roughly one per microservice
-	appletv: "appletv",
-	denon: "denon",
-	...
+  // topics roughly one per microservice
+  appletv: "appletv",
+  denon: "denon",
+  ...
 },
 ```
 
