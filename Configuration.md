@@ -24,7 +24,9 @@ YAML is not JavaScript. Why complicate things by using yet anotheer definition l
 
 The Config.js file exports a single JavaScript Object (not JSON, not JSON stringified). The Object contains members that are used by the client software and the microservices to configure themselves.
 
-## root member
+## root members
+
+A root member is a key in the configuration object.  The member might be another Object or an Array or a single value.
 
 These root members are useful:
 
@@ -152,6 +154,14 @@ theaters: [
   ...
 ],
 ```
+
+## dashboards member
+
+The dashboards member is a root member array.
+
+The array contains a list of [Dashboard](Dashboards.md) Objects, each one defining items for a tile based user interface.  This interface can present multiple dashboards in the user interface - one for the Family Room, one for the Bed Room, and so on.  You probably want to control the ceiling fan in the Family Room from the Family Room dashboard, but not the Bed Room dashboard.
+
+
 
 # See Also:
 
