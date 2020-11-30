@@ -50,7 +50,7 @@ mqtt: {
 },
 ```
 
-## microservices
+## microservices member
 
 The microservices member is a root member Object.
 
@@ -73,9 +73,45 @@ microservices: {
 },
 ```
 
+## presence member
+
+The presence member is a root member Array.
+
+The presence array contains one Object for each person/device combination used to determine presence. It is used to configure the [presence-microservice](https://github.com/RoboDomo/presence-microservice).
+
+### Example
+
+```
+presence: [
+  { person: "me", device: "my-iphone" },
+  { person: "spouse", device "spouse-iphone"},
+],
+```
+
+## locks member
+
+The locks member is a root member Array.
+
+It contains an Object for each controllable (door/window/etc.) lock that can be controlled.
+
+### Example
+
+```
+locks: [
+  { device: "Front Door Lock", hub: "hubitat", name: "Front Door Lock", room: "Entry Way" },
+  ...
+],
+```
+
 # See Also:
 
-- The [config-microservice](https://github.com/RoboDomo/config-microservice) repository.
+## Documentation
+
 - [Microservice Architecture](Microservice.md) - About Microservices.
 - [Macros](Macros.js) - How RoboDomo Macros work.
+
+## Repositories
+
 - The [macros-microservice](https://github.com/RoboDomo/macros-microservice) repository.
+- The [config-microservice](https://github.com/RoboDomo/config-microservice) repository.
+- The [presence-microservice](https://github.com/RoboDomo/presence-microservice) repository.
