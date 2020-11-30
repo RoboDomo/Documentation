@@ -130,12 +130,12 @@ theaters: [
       { name: "TiVo", title: "TiVo Bolt", type: "tivo", favorites: tivoFavorites, device: "tivo-bolt", guide: <SchedulesDirect tv guide code>"},
       { name: "Apple TV", title: "Apple TV 4K", type: "appletv", device: "family-room-appletv" },
 	  ...
-	],
-	activities: [
-	  { name: "Watch TV", defaultDevice: "TiVo", inputs: { tv: "hdmi1", avr: "TV"}, macro: "Famly Room Watch TV" },
-	  { name: "Watch Apple TV", defaultDevice: "Apple TV", inputs: { tv: "hdmi2", avr: "MPLAY"}, macro: "Famly Room Watch Apple TV" },
-	  ...
-	],
+    ],
+    activities: [
+      { name: "Watch TV", defaultDevice: "TiVo", inputs: { tv: "hdmi1", avr: "TV"}, macro: "Famly Room Watch TV" },
+      { name: "Watch Apple TV", defaultDevice: "Apple TV", inputs: { tv: "hdmi2", avr: "MPLAY"}, macro: "Famly Room Watch Apple TV" },
+      ...
+    ],
   },
   // Theater for the bed room
   {
