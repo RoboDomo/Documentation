@@ -222,7 +222,7 @@ rgb: [
 ],
 ```
 
-# # autelis member
+## autelis member
 
 The autelis root member is an Object that defines the location and credentials of the Autelis API server, the weather location, and a deviceMap with forward and backward hash maps (Objects).  The configuration of your pool and autelis controller is unique to how your installer set up your pool when it was constructed.  The Autelis controller reports devices like aux1, which might be the spa jets in one home but pool cleaner in another.  The forward and reverse maps can be used to associate the aux names to friendly names (e.g. aux1 -> jets).
 
