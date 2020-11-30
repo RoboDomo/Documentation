@@ -24,7 +24,7 @@ YAML is not JavaScript. Why complicate things by using yet anotheer definition l
 
 The Config.js file exports a single JavaScript Object (not JSON, not JSON stringified). The Object contains members that are used by the client software and the microservices to configure themselves.
 
-## root
+## root member
 
 These root members are useful:
 
@@ -32,7 +32,7 @@ These root members are useful:
 - version: the version of teh software
 - location: where this RoboDomo is deployed
 
-## mqtt
+## mqtt member
 
 The mqtt member is a root member Object. It contains keys for host and port of the MQTT server, plus contants for the various MQTT topics.
 
@@ -63,11 +63,13 @@ It contains a services key, which contains an array of microservice information 
 ```
 microservices: {
   types: [ "General", "System", "Multimedia" ],
+  services: [
   { title: "Sony Bravia TVs", mqtt: "bravia", description: "Sony Bravia TV controls", name: "brava-microservice", type: "Multimedia""},
   { title: "LG TVs", mqtt: "lgtv", description: "LG TV controls", name: "lgtv-microservice", type: "Multimedia""},
   { title: "Here Weather", mqtt: "here", description: "Montior weather conditions via here.com", name: "here.com-microservice", type: "General""},
   { title: "Configuration"", mqtt: "settings", description: "Monitor and update COnfiguration files", name: "config-microservice", type: "Stystem""},
   ...
+  ],
 },
 ```
 
