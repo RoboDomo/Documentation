@@ -159,9 +159,38 @@ theaters: [
 
 The dashboards member is a root member array.
 
-The array contains a list of [Dashboard](Dashboards.md) Objects, each one defining items for a tile based user interface.  This interface can present multiple dashboards in the user interface - one for the Family Room, one for the Bed Room, and so on.  You probably want to control the ceiling fan in the Family Room from the Family Room dashboard, but not the Bed Room dashboard.
+The array contains a list of [Dashboard](Dashboards.md) Arrays, each one defining items for a tile based user interface.  This interface can present multiple dashboards in the user interface - one for the Family Room, one for the Bed Room, and so on.  You probably want to control the ceiling fan in the Family Room from the Family Room dashboard, but not the Bed Room dashboard.
 
+The array of tiles specifies the specific tiles to be presented in the user interface. Each tile type Object might contain members specific to that type of tile.  For example, the Clock tile needs no additional members, but the Weather tile needs a location member to determine what weather information to display (you might have weather for your home and another for your office...).
 
+## Example
+```
+dashboards: [
+  { 
+    title: "Theater",
+	key: "theater",
+	tiles: [
+	  { type: "clock" },
+	  { tyype: "theater", title: "Theater" },
+	  { type: "lock", hub: "hubitat", device: "Front Door Lock", title: ""Front Door Lock" },
+	  { type: "fan", hub: "hubitat", device: "Family Room Ceiling Fan" },
+	  { type: "switch", hub: "hubitat", device: "Family Room Ceiling Fan Switch" },
+	  { type: "macro",  name: "Bed Time", label "Bed Time" },
+	  ...
+	],
+  },
+  {
+    title: "Bed Room",
+    key: "bedroom",
+    tiles: [
+      ...,
+      { type: "macro", name: "Good Night", label: "Good Night" },
+      ...
+    ],
+  },
+  ...
+],
+```
 
 # See Also:
 
