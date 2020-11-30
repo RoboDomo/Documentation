@@ -103,6 +103,54 @@ locks: [
 ],
 ```
 
+## theaters member
+
+The theaters member is a root member Array.
+
+The Array contains an Object per "theater" in your home/office. A theater is a collection of devices that work together, such as a TV, AVR, and TiVo set top box. You might have a theater for your family room and another for your bedroom. There is no limit to the number of theaters.
+
+RoboDomo is designed to operate as a universal remote. A theater has an array of devices and an array of activities.
+
+An activity is something like "Watch TV" or "Watch Apple TV". The activies member of a theater Object contains an Object per activiy. The Object defines the name of the activity, the default device for that activity (e.g. watching TV activity might have the TiVo as the default device), the inputs for the TV and AVR to set up or detect the activity is active, and a macro name to run when the activity is started.
+
+There should be an activity for "All Off" that turns off the devices in the theater.
+
+### Example
+
+```
+theaters: [
+  {
+    title: "Family Room",
+	key: "family-room",
+	guide: <SchedulesDIrect tv guide code>,
+    devices: [
+	  { name: "LG TV", title: "OLED TV", type: "lgtv", favorites: lgtvFavorites, device: "OLEDE8P" },
+	  { name: "AVR", title: "Denon AVR", type: denon", device: "denon-avr" },
+	  { name: "TiVo", title: "TiVo Bolt", type: "tivo", favorites: tivoFavorites, device: "tivo-bolt", guide: <SchedulesDirect tv guide code>"},
+	  { name: "Apple TV", title: "Apple TV 4K", type: "appletv", device: "family-room-appletv" },
+	  ...
+	],
+	activities: [
+	  { name: "Watch TV", defaultDevice: "TiVo", inputs: { tv: "hdmi1", avr: "TV"}, macro: "Famly Room Watch TV" },
+	  { name: "Watch Apple TV", defaultDevice: "Apple TV", inputs: { tv: "hdmi2", avr: "MPLAY"}, macro: "Famly Room Watch Apple TV" },
+	  ...
+	],
+  },
+  {
+    title: "Bed Room",
+	key: "bed-room",
+	guide: <SchedulesDIrect tv guide code>,
+	devices: [
+	  ...
+	],
+	activites: [
+	  ...
+	],
+  },
+  ...
+],
+```
+
 # See Also:
 
 ## Documentation
