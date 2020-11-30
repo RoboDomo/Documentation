@@ -12,6 +12,9 @@ The microservices post status messages via [MQTT](MQTT.md), and process command 
 
 The microservices architecture allows for separation of concerns betwen client/WWW user interfaces. If you want to roll your own client, you only need to send and receive MQTT messages for the topics/devices your interface presents.
 
+# Docker Hub
+For the most part, the microservices are built as Docker containers and published (public) on Docker Hub.  This simplifies the use of the various microservices provided by RoboDomo.  If you use the [docker-scripts repository](https://github.com/RoboDomo/docker-scripts), there is a start-<microservice>.sh script that automatically downloads the image from Docker Hub and starts it.
+
 ## microservice-core
 
 Microservices have a lot of functionality in common. Rather than duplicate/implement all this functionality in each microservice repository, we add the [microservice-core](https://github.com/RoboDomo/microservice-core) Node JS module via npm install:
@@ -58,6 +61,8 @@ HostBase provides some handy methods:
 
 # See Also
 
-- [Configuration](Configuration.md) - how to configure your microservices and client.
+- [Quick Start](QuickStart.md) - how to get RoboDomo up and running.
+- [Configuring RoboDomo](Configuration.md) - how to configure your microservices and client.
 - [MQTT](MQTT.md) - how MQTT is used in RoboDomo
-- [microservice-core repository](https://github.com/RoboDomo/microservice-core)
+- [microservice-core](https://github.com/RoboDomo/microservice-core) repository.
+
