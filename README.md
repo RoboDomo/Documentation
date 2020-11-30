@@ -17,6 +17,9 @@ The backend for RoboDomo is a growing number of available microservices that run
 microservices that are appropriate to your home or office.  That is, if you have an LG TV, you'd run the LGTV
 microservice, and if you don't have an LG TV, you would have no need to run it.
 
+## Table of Contents
+- [Microservice Architecture](Microservices.md)
+
 ## RoboDomo puts the "Smart" in Smart Home
 RoboDomo features a Macros microservice and a Triggers microservice.  These are two powerful concepts that enable the
 implementation of scripts and rules; your smart home becomes more than just several Things that you can remotely control
