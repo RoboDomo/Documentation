@@ -355,8 +355,8 @@ This root member is an Object that contains configuration for one or more TV Gui
 
 The data are provided by SchedulesDirect.  A subscription costs $25/year.
 
-How to obtain your guide/device code: 
-    https://github.com/SchedulesDirect/JSON-Service/wiki/API-20141201#obtain-the-list-of-headends-in-a-postal-code
+To obtain your guide/device code: 
+-    https://github.com/SchedulesDirect/JSON-Service/wiki/API-20141201#obtain-the-list-of-headends-in-a-postal-code
 
 ### Example
 
