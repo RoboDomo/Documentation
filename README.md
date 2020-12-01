@@ -21,6 +21,8 @@ RoboDomo supports both Hubitat (preferred) and SmartThings hubs.  Both hubs can 
 
 ## Table of Contents
 
+*Note* - The documentation is a work in progress and may be incomplete.
+
 1. [Quick Start Guide](QuickStart.md)
 2. [Features](Features.md)
 3. [Hardware](Hardware.md)
