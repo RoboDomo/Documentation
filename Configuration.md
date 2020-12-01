@@ -282,6 +282,90 @@ nest: {
   ],
 }
 ```
+
+## icomfort member
+
+This root member is an Object that defines the iComfort zones for your A/C and heating system.  Tha iComfort S30 is the device supported.
+
+*Note:* You may not find S30 support in many other Home Automation systems!
+
+### Example
+
+```
+icomfort: {
+  thermostats: [
+    { zone: "0", title: "Family Roomt" },
+    { zone: "1", title: "Den" },
+    { zone: "2", title: "Guest Bedroom" },
+    { zone: "3", title: "Master Bedroom" },
+  ],
+},
+```
+
+## sensors member
+
+
+This root member is an Array of sensor Object definitions.
+
+These values are for server-side or client-side use.
+
+### Example
+
+```
+sensors: [
+  { name: "Bathroom Sensor", hub: "hubitat", type: "battery" },
+  { name: "Bathroom Sensor", hub: "hubitat", type: "motion" },
+  { name: "Sliding Door", hub: "hubitat", type: "contact" },
+  { name: "Bedroom Window", hub: "hubitat", type: "contact" },
+  ...
+],
+```
+
+## smartthings member
+
+This root member is an Object that defines SmartThings and Hubitat devices available to RoboDomo.
+
+The name "smartthings" is from when RoboDomo only supported SmartThings hubs. RoboDomo now supports Hubitat, as well, so to differentiate which hub a thing is connected to, the Object definitions contain a hub member.  
+
+The hub member is the hostname (or IP) of the hub to use for the thing.  You can have multiple hubs of each kind configured this way.
+
+The rooms member of a thing definition defines which rooms the device is associated with.  A presence thing might be in all the rooms.
+
+*Note* RoboDomo supports using both SmartThings and Hubitat hubs at the same time.  Some devices connected to each.
+
+### Example
+
+```
+smartthings: {
+  device: "smartthings", // default device
+  name: "SmartThings Hub", // default device name
+  things: [
+    { name: "Ceiling Fan", type: "fan", hub: "hubitat", rooms: [ "Family Room"]},
+    { name: "Ceiling Fan Light", type: "dimmer", hub: "hubitat", rooms: [ "Family Room"]},
+    { name: "Ceiling Fan Light", type: "dimmer", hub: "hubitat", rooms: [ "Family Room"]},
+    { name: "Front Door Lock", type: "lock", hub: "hubitat", rooms: ["Family Room", "Foyer"]},
+    ...
+  ],
+},
+```
+
+## tvguide member
+
+This root member is an Object that contains configuration for one or more TV Guide data to acquire and update.
+
+The data are provided by SchedulesDirect.  A subscription costs $25/year.
+
+How to obtain your guide/device code: https://github.com/SchedulesDirect/JSON-Service/wiki/API-20141201#obtain-the-list-of-headends-in-a-postal-code
+### Example
+
+```
+tvguide: {
+  guides: [
+    { device: "CA00053"", name:" "Beverly Hills Time Warner Cable" }
+  ],
+}
+```
+
 # See Also:
 
 ## Documentation
@@ -296,3 +380,4 @@ nest: {
 - The [presence-microservice](https://github.com/RoboDomo/presence-microservice) repository.
 - The [autelis-microservice](https://github.com/RoboDomo/autelis-microservice) repository.
 - The [nest-mircroservice](https://github.com/RoboDomo/nest-microservice) repository.
+- The [icomfort-mircroservice](https://github.com/RoboDomo/icomfort-microservice) repository.
