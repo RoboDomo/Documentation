@@ -28,6 +28,12 @@ The Config.js file exports a single JavaScript Object (not JSON, not JSON string
 
 A root member is a key in the configuration object. The member might be another Object or an Array or a single value.
 
+Not all root members are required, but if you run the [autelis-microservice](https://github.com/RoboDomo/autelis-microservice), you will need to include the autlis member/configuration.
+
+You may add and members not defined here for your own purposes.  They will be ignored.
+
+The examples provided here are for reference purposes.  They will likely work, but full documentation for the configuration of each microservice (and the client) is explained in depth in the documenation for the microservices and client.
+
 These root members are useful:
 
 - name: the name of the system ("RoboDomo Home Automation System")
@@ -255,6 +261,27 @@ autelis: {
 },
 ```
 
+## nest member
+
+The nest root member is an Object that defines Nest thermostats and Protect devices in your home/office.
+
+*Warning:* The "Works with Nest" API was [retired by Google](https://developers.nest.com/).  The nest-microservice may or may not work for you.
+
+
+### Example
+
+```
+nest: {
+  thermostats: [
+    { device: "main1", name: "Thermostat 1", }
+    { device: "main2", name: "Thermostat 2", }
+  ],
+  protects: [
+    { device: "Foyer Nest Protect", name: "Foyer", }
+    { device: "Bedroom Nest Protect", name: "Bedroom", }
+  ],
+}
+```
 # See Also:
 
 ## Documentation
@@ -268,3 +295,4 @@ autelis: {
 - The [config-microservice](https://github.com/RoboDomo/config-microservice) repository.
 - The [presence-microservice](https://github.com/RoboDomo/presence-microservice) repository.
 - The [autelis-microservice](https://github.com/RoboDomo/autelis-microservice) repository.
+- The [nest-mircroservice](https://github.com/RoboDomo/nest-microservice) repository.
