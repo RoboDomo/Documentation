@@ -24,6 +24,8 @@ YAML is not JavaScript. Why complicate things by using yet anotheer definition l
 
 The Config.js file exports a single JavaScript Object (not JSON, not JSON stringified). The Object contains members that are used by the client software and the microservices to configure themselves.
 
+In various sections of the configuration Object, hostnames for your devices (e.g. a teletivion, a Harmony Hub, a Hubitat hub, and so on) are required.  Typically these are the "device" members of configuraiton Objects.
+
 ## root members
 
 A root member is a key in the configuration object. The member might be another Object or an Array or a single value.
@@ -367,11 +369,155 @@ tvguide: {
   ],
 }
 ```
+## tivo member
+
+This root member is an Object that contains configuration for the TiVo set top boxes and DVRs for RoboDomo control and monitoring.
+
+### Example
+
+```
+tivo: {
+  guide: "CA00053",
+  boxes: [
+    { device: "tivo-bolt", name: "Family Room TiVo", denon: "family-room-avr", guide: "CA00053" },
+    { device: "tivo-bedroom", name: "Bed ROom TiVo", denon: "bedroom-avr", guide: "CA00053" },
+    ...
+  ],
+},
+```
+
+## denon member
+
+This root member is an Object that defines the AVRs to be controlled / monitored.
+
+### Example
+
+```
+denon: {
+  receivers: [
+    { name: "Family Room Receiver", device: "denon1" },
+    { name: "Bed Room Receiver", device: "denon2" },
+    ...
+  ]
+},
+```
+
+## lgtv member
+
+This root member is an Object that defines the LG TVs to be controlled / monitored.
+
+For each tv, there is an array of favorites that can be common to all TVs or unique per TV.
+
+### Example
+
+```
+// somewhere at the top of the Config.js file
+const lgtvFavorites = [
+  "amazon",
+  "hulu",
+  "netflix",
+  "youtube",
+  "hdmi1",
+  "hdmi2",
+  "hdmi3",
+  "hdmi4",
+];
+
+
+// somewhere in the exported config Object
+lgtv: {
+  tvs: [
+    { name: "Family Room TV", device: "oledb8p"", denon: "denon1", favorites: lgtvFavorites },
+    ...
+  ]
+},
+```
+
+## bravia member
+
+This root member is an Object that defines the Sony Bravia TVs to be controlled / monitored.
+
+### Example
+
+```
+// somewhere at the top of the Config.js file
+const braviaFavorites = [
+  "amazon",
+  "hulu",
+  "netflix",
+  "youtube",
+];
+
+
+// somewhere in the exported config Object
+bravia: {
+  tvs: [
+    { name: "Bed Room TV", device: "sony850c"", denon: "denon2", favorites: braviaFavorites },
+    { name: "Den TV", device: "sony851c"", denon: "denon3", favorites: braviaFavorites },
+    ...
+  ]
+},
+```
+## harmony member
+
+This root member is an Object that defines the Logitech Harmony hubs to be controlled / monitored.
+
+*Note* Some home automation systems have difficulty managing more than one Harmony Hub.  RoboDomo has no issues.
+
+### Example
+
+```
+harmony: {
+  hubs: [
+  { device: "family-room-hub", name: "Family Room", ip: <ip of your hub>, mac: <mac address of your hub", denon: "denon1" },"
+  { device: "bedroom-hub", name: "Bed Room", ip: <ip of your hub>, mac: <mac address of your hub", denon: "denon2" },"
+  ...
+},
+
+```
+
+## roku member
+
+This root member is an Object that defines the Roku devices to be controlled / monitored.
+
+For each Roku device, there is an array of favorites that can be common to all devices or unique per device.
+
+### Example
+
+```
+// somewhere at the top of the Config.js file
+const rokuFavorites = [
+  "Spectrum TV",
+  "Netflix",
+  "Prime Video",
+  "YouTube",
+  "Hulu",
+];
+
+// somewhere in the exported config Object:
+
+roku: {
+  favorites: rokuFavorites,
+  devices: [
+    {name: "Family Room", device: "family-room-roku", favorites: rokuFavorites },
+    {name: "Bed Room", device: "bedroom-roku", favorites: rokuFavorites },
+    ...
+  ],
+},
+
+```
+
+## appletv member
+
+This root member is an Object that defines the Apple TV devices to be controlled / monitored.
+
+The [appletv-microservice](https://github.com/RoboDomo/appletv-microservice) uses the [node-appletv](https://github.com/evandcoleman/node-appletv) node module.  The protocol for communicating with the Apple TVs requires a credentials string that is a very long string of hex digits and hyphes.  To obtain the credentials for your Apple TV devices, follow the instructions in the node-appletv repository.
 
 # See Also:
 
 ## Documentation
 
+- [DNS Setup](DNS.md) - how to set up DNS to make all the devices addressable.
 - [Microservice Architecture](Microservice.md) - About Microservices.
 - [Macros](Macros.js) - How RoboDomo Macros work.
 
@@ -383,3 +529,7 @@ tvguide: {
 - The [autelis-microservice](https://github.com/RoboDomo/autelis-microservice) repository.
 - The [nest-mircroservice](https://github.com/RoboDomo/nest-microservice) repository.
 - The [icomfort-mircroservice](https://github.com/RoboDomo/icomfort-microservice) repository.
+
+## External Repositories
+
+- The [node-appletv](https://github.com/evandcoleman/node-appletv) node module repository. 
