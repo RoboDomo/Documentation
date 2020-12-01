@@ -513,6 +513,32 @@ This root member is an Object that defines the Apple TV devices to be controlled
 
 The [appletv-microservice](https://github.com/RoboDomo/appletv-microservice) uses the [node-appletv](https://github.com/evandcoleman/node-appletv) node module.  The protocol for communicating with the Apple TVs requires a credentials string that is a very long string of hex digits and hyphes.  To obtain the credentials for your Apple TV devices, follow the instructions in the node-appletv repository.
 
+The device name is the name you set up on the Apple TV, using the settings app.
+
+### Example
+
+```
+appletv: {
+  devices: [
+    { 
+      name: "Family Room", 
+      device: "family-room-appletv", 
+      hostname: "family-room-appletv", 
+      serial: <serial from settings on ATV>,
+      credentials: <big lotg string of hex digits and hyphens>,
+    },
+    { 
+      name: "Bedroom", 
+      device: "bedroom-appletv", 
+      hostname: "bedroom-appletv", 
+      serial: <serial from settings on ATV>,
+      credentials: <big lotg string of hex digits and hyphens>,
+    },
+	...
+  ]
+}
+```
+
 # See Also:
 
 ## Documentation
